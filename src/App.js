@@ -1,28 +1,21 @@
 import React from 'react';
 import './App.css';
 
-import Navbar from './components/Navbar/Navbar'
 import Header from './components/Header/Header'
-import Container from './components/Container/Container'
-import Footer from './components/Footer/Footer'
+import Game from './components/Game/Game'
 
 function App() {
   return (
     <div className="App">
       <div>
-        {/* <Navbar /> */}
+        <Header />
       </div>
       <div>
-        {/* <Header /> */}
-      </div>
-      <div>
-        <Container />
-      </div>
-      <div>
-        {/* <Footer /> */}
+        <Game />
       </div>
     </div>
   );
+
 }
 
 export default App;
