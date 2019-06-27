@@ -3,6 +3,7 @@ import './App.css';
 
 import Header from './components/Header/Header'
 import Game from './components/Game/Game'
+import Footer from './components/Footer/Footer'
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
       </div>
       <div>
         <Game />
+      </div>
+      <div>
+        <Footer />
       </div>
     </div>
   );

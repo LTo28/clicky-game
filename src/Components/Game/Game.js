@@ -1,22 +1,6 @@
 import React, { Component } from 'react'
 import './style.css'
-//import shuffle from 'shuffle-array'
-
-import img1 from '../../assets/images/1.jpeg'
-import img2 from '../../assets/images/2.jpeg'
-import img3 from '../../assets/images/3.jpeg'
-import img4 from '../../assets/images/4.jpeg'
-import img5 from '../../assets/images/5.jpeg'
-import img6 from '../../assets/images/6.jpeg'
-import img7 from '../../assets/images/7.jpeg'
-import img8 from '../../assets/images/8.jpeg'
-import img9 from '../../assets/images/9.jpeg'
-import img10 from '../../assets/images/10.jpeg'
-import img11 from '../../assets/images/11.jpeg'
-import img12 from '../../assets/images/12.jpeg'
-
-
-let imgArr = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12]
+import Images from '../../images.json'
 
 //Fisher-Yates Shuffle Function
 const shuffle = (array) => {
@@ -34,51 +18,49 @@ const shuffle = (array) => {
   return array;
 }
 
-
 class Game extends Component {
   state = {
-    imgArr: imgArr,
+    imageArr: Images,
     score: 0,
     topscore: 0,
-    correct: true,
     selection: []
   }
 
   clickEvent = (id) => {
-    //reset game
-    //console.log(id)
-    if (this.state.selection.includes(this.state.selection)) {
+    if (this.state.selection.includes(id)) {
       this.setState({
         score: 0,
         selection: []
-      }, () => console.log('wrong choice'))
+      }, () => console.log('Looks like you forgot!'))
     } else {
       this.setState({
-        selection: this.state.selection.push(id),
-        score: +1
-      }, () => console.log(`Score: ${this.state.score} and ID: ${this.state.selection}`))
-
+        selection: [...this.state.selection, id],
+        score: ++this.state.score
+      }) 
+      if (this.state.topscore <= this.state.score) {
+        this.setState({ 
+          topScore: ++this.state.score 
+        })
+      }
+      console.log(id)
     }
-    shuffle(imgArr)
+    shuffle(Images)
   }
 
-
-
-  renderImage = _ => {
+  renderImages = _ => {
     return (
-      <div className="clickitems">
-        {this.state.imgArr.map((data, id) => (
-            <img key={id} src={data} onClick={() => this.clickEvent(id)} />
+      <div>
+        {this.state.imageArr.map((data) => (
+          <img className="clickitems" key={data.id} src={data.image} onClick={() => this.clickEvent(data.id)} />
         ))}
       </div>
     )
   }
 
-
   render() {
     return (
       <div>
-        {this.renderImage()}
+        {this.renderImages()}
         {/* <img src={img1} alt='img1' /> */}
       </div>
     );
