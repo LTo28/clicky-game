@@ -1,12 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
+import AppBar from '@material-ui/core/AppBar';
+import './style.css'
 
-function Header() {
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: '#263238' }
+  },
+});
+
+
+
+function Header(props) {
   return (
-    <div className='header'>
-      <h1>Clicky Game</h1>
-      <span>Score:</span>
-      <span></span>
-    </div>
+    <ThemeProvider theme={theme}>
+      <AppBar className="header" position="static" color="primary">
+        <h1 className="title">Clicky Game</h1>
+        <h2>
+          <div className="text">
+          {props.begin}
+          {props.wrongchoice}
+          {props.gameover}
+          </div>
+          <span> Score: {props.score} </span> <span>Top Score: {props.topscore}</span>
+        </h2>
+      </AppBar>
+    </ThemeProvider>
   )
 }
 

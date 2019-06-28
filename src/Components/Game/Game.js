@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import './style.css'
 import Images from '../../images.json'
+import Footer from '../Footer/Footer'
+import Header from '../Header/Header'
+
 
 //Fisher-Yates Shuffle Function
 const shuffle = (array) => {
@@ -23,6 +26,9 @@ class Game extends Component {
     imageArr: Images,
     score: 0,
     topscore: 0,
+    begin: 'Click an image to test your memory!',
+    wrongchoice: '',
+    gameover: '',
     selection: []
   }
 
@@ -30,16 +36,25 @@ class Game extends Component {
     if (this.state.selection.includes(id)) {
       this.setState({
         score: 0,
+        wrongchoice: 'Woops, you already chose that! Click an image to start again.',
         selection: []
       }, () => console.log('Looks like you forgot!'))
     } else {
       this.setState({
+        wrongchoice: '',
+        begin: '',
         selection: [...this.state.selection, id],
         score: ++this.state.score
-      }) 
-      if (this.state.topscore <= this.state.score) {
-        this.setState({ 
-          topScore: ++this.state.score 
+      })
+      if (this.state.score > this.state.topscore) {
+        this.setState({
+          topscore: +this.state.score
+        })
+      }
+      if (this.state.score === 12) {
+        console.log('You have good memory!')
+        this.setState({
+          gameover: 'You have good memory!'
         })
       }
       console.log(id)
@@ -49,7 +64,7 @@ class Game extends Component {
 
   renderImages = _ => {
     return (
-      <div>
+      <div className="images">
         {this.state.imageArr.map((data) => (
           <img className="clickitems" key={data.id} src={data.image} onClick={() => this.clickEvent(data.id)} />
         ))}
@@ -60,8 +75,9 @@ class Game extends Component {
   render() {
     return (
       <div>
-        {this.renderImages()}
-        {/* <img src={img1} alt='img1' /> */}
+          <Header score={this.state.score} topscore={this.state.topscore} begin={this.state.begin} wrongchoice={this.state.wrongchoice} gameover={this.state.gameover}/>
+          {this.renderImages()}
+          <Footer />
       </div>
     );
   }

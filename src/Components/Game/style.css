@@ -1,5 +1,23 @@
 .clickitems {
-  width: 200px;
-  height: 200px;
-  margin: 1%
+  width: 230px;
+  height: 210px;
+  margin: 10px;
+  max-width: 1280;
+  box-shadow: 8px 8px 4px #B8B8B8;
+}
+
+/* container styling from hw example: https://clicky-game.netlify.com/ */
+
+.images {
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 80%;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 20px;
+  width: 95%;
+  margin: 0 auto;
 }
