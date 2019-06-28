@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import Game from './components/Game/Game'
+import Game from './Components/Game/Game'
 
 function App() {
   return (
